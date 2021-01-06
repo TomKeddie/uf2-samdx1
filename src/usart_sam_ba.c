@@ -30,6 +30,7 @@
 #include "uf2.h"
 #include "uart_driver.h"
 
+#if USE_UART
 /* Variable to let the main task select the appropriate communication interface
  */
 volatile uint8_t b_sharp_received;
@@ -204,7 +205,7 @@ uint32_t usart_getdata(void *data, uint32_t length) {
     *ptrdata = usart_getc();
     return (1);
 }
-
+#endif
 static uint16_t crcCache[256];
 
 //*----------------------------------------------------------------------------
@@ -227,7 +228,7 @@ uint16_t add_crc(uint8_t ch, unsigned short crc0) {
 
     return ((crc0 << 8) ^ crcCache[((crc0 >> 8) ^ ch) & 0xff]) & 0xffff;
 }
-
+#if USE_UART
 //*----------------------------------------------------------------------------
 //* \fn    getbytes
 //* \brief
@@ -503,3 +504,4 @@ uint32_t usart_getdata_xmd(void *data, uint32_t length) {
     return (true);
     //    return(b_run);
 }
+#endif

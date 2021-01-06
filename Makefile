@@ -131,6 +131,9 @@ bmp-loop:
 bmp-gdb: $(BUILD_PATH)/$(NAME).bin
 	$(GDB) $(BMP_ARGS) $(BUILD_PATH)/$(NAME).elf
 
+openocd-flash : $(BUILD_PATH)/$(NAME).bin
+	$(GDB) --batch -iex "target extended-remote localhost:3333" -ex "load" -ex "monitor reset" $(BUILD_PATH)/$(NAME).elf
+
 $(BUILD_PATH)/flash.jlink: $(BUILD_PATH)/$(NAME).bin
 	echo " \n\
 r \n\
