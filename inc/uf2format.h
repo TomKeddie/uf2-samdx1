@@ -8,7 +8,9 @@
 
 // if you increase that, you will also need to update the linker script file
 #ifdef SAMD21
+#ifndef APP_START_ADDRESS
 #define APP_START_ADDRESS 0x00002000
+#endif
 #define UF2_FAMILY 0x68ed2b88
 #endif
 #ifdef SAMD51
